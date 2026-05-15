@@ -15,7 +15,6 @@ import (
 )
 
 func TestBillingTopupNew(t *testing.T) {
-	t.Skip("HTTP 404 error from prism -- route not in spec")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -43,7 +42,6 @@ func TestBillingTopupNew(t *testing.T) {
 }
 
 func TestBillingTopupStatus(t *testing.T) {
-	t.Skip("HTTP 404 error from prism -- route not in spec")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL

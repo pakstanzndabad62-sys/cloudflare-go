@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package ai_gateway_test
+package zero_trust_test
 
 import (
 	"context"
@@ -9,12 +9,12 @@ import (
 	"testing"
 
 	"github.com/cloudflare/cloudflare-go/v6"
-	"github.com/cloudflare/cloudflare-go/v6/ai_gateway"
 	"github.com/cloudflare/cloudflare-go/v6/internal/testutil"
 	"github.com/cloudflare/cloudflare-go/v6/option"
+	"github.com/cloudflare/cloudflare-go/v6/zero_trust"
 )
 
-func TestBillingTopupConfigNew(t *testing.T) {
+func TestResourceLibraryApplicationListWithOptionalParams(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -28,10 +28,13 @@ func TestBillingTopupConfigNew(t *testing.T) {
 		option.WithAPIKey("144c9defac04969c7bfad8efaa8ea194"),
 		option.WithAPIEmail("user@example.com"),
 	)
-	_, err := client.AIGateway.Billing.Topup.Config.New(context.TODO(), ai_gateway.BillingTopupConfigNewParams{
-		AccountID: cloudflare.F("account_id"),
-		Amount:    cloudflare.F(int64(5000)),
-		Threshold: cloudflare.F(int64(500)),
+	_, err := client.ZeroTrust.ResourceLibrary.Applications.List(context.TODO(), zero_trust.ResourceLibraryApplicationListParams{
+		AccountID: cloudflare.F("023e105f4ecef8ad9ca31a8372d0c353"),
+		Filter:    cloudflare.F("filter"),
+		Limit:     cloudflare.F(int64(0)),
+		Offset:    cloudflare.F(int64(0)),
+		OrderBy:   cloudflare.F("order_by"),
+		Search:    cloudflare.F("xx"),
 	})
 	if err != nil {
 		var apierr *cloudflare.Error
@@ -42,7 +45,7 @@ func TestBillingTopupConfigNew(t *testing.T) {
 	}
 }
 
-func TestBillingTopupConfigDelete(t *testing.T) {
+func TestResourceLibraryApplicationGet(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -56,35 +59,13 @@ func TestBillingTopupConfigDelete(t *testing.T) {
 		option.WithAPIKey("144c9defac04969c7bfad8efaa8ea194"),
 		option.WithAPIEmail("user@example.com"),
 	)
-	_, err := client.AIGateway.Billing.Topup.Config.Delete(context.TODO(), ai_gateway.BillingTopupConfigDeleteParams{
-		AccountID: cloudflare.F("account_id"),
-	})
-	if err != nil {
-		var apierr *cloudflare.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
-func TestBillingTopupConfigGet(t *testing.T) {
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := cloudflare.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIToken("Sn3lZJTBX6kkg7OdcBUAxOO963GEIyGQqnFTOFYY"),
-		option.WithAPIKey("144c9defac04969c7bfad8efaa8ea194"),
-		option.WithAPIEmail("user@example.com"),
+	_, err := client.ZeroTrust.ResourceLibrary.Applications.Get(
+		context.TODO(),
+		"0b63249c-95bf-4cc0-a7cc-d7faaaf1dac0",
+		zero_trust.ResourceLibraryApplicationGetParams{
+			AccountID: cloudflare.F("023e105f4ecef8ad9ca31a8372d0c353"),
+		},
 	)
-	_, err := client.AIGateway.Billing.Topup.Config.Get(context.TODO(), ai_gateway.BillingTopupConfigGetParams{
-		AccountID: cloudflare.F("account_id"),
-	})
 	if err != nil {
 		var apierr *cloudflare.Error
 		if errors.As(err, &apierr) {

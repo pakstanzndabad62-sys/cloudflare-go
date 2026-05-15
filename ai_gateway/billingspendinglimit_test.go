@@ -15,7 +15,6 @@ import (
 )
 
 func TestBillingSpendingLimitNew(t *testing.T) {
-	t.Skip("HTTP 404 error from prism -- route not in spec")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -45,7 +44,6 @@ func TestBillingSpendingLimitNew(t *testing.T) {
 }
 
 func TestBillingSpendingLimitDelete(t *testing.T) {
-	t.Skip("HTTP 404 error from prism -- route not in spec")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -72,7 +70,6 @@ func TestBillingSpendingLimitDelete(t *testing.T) {
 }
 
 func TestBillingSpendingLimitGet(t *testing.T) {
-	t.Skip("HTTP 404 error from prism -- route not in spec")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL

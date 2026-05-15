@@ -15,7 +15,6 @@ import (
 )
 
 func TestSmartTieredCacheNew(t *testing.T) {
-	t.Skip("HTTP 405 error from prism -- POST method not in spec")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
