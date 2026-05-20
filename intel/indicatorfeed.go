@@ -10,11 +10,11 @@ import (
 	"slices"
 	"time"
 
-	"github.com/cloudflare/cloudflare-go/v6/internal/apijson"
-	"github.com/cloudflare/cloudflare-go/v6/internal/param"
-	"github.com/cloudflare/cloudflare-go/v6/internal/requestconfig"
-	"github.com/cloudflare/cloudflare-go/v6/option"
-	"github.com/cloudflare/cloudflare-go/v6/packages/pagination"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apijson"
+	"github.com/cloudflare/cloudflare-go/v7/internal/param"
+	"github.com/cloudflare/cloudflare-go/v7/internal/requestconfig"
+	"github.com/cloudflare/cloudflare-go/v7/option"
+	"github.com/cloudflare/cloudflare-go/v7/packages/pagination"
 )
 
 // IndicatorFeedService contains methods and other services that help with
@@ -282,6 +282,14 @@ type IndicatorFeedGetResponse struct {
 	// when their indicators were dropped (popularity allowlist, expired valid_until,
 	// etc.) without reading loader logs.
 	LastUploadSummary IndicatorFeedGetResponseLastUploadSummary `json:"last_upload_summary"`
+	// Human-readable error message describing why the latest upload failed. Populated
+	// only when `latest_upload_status` is `Error`. Returns one of a small fixed set of
+	// category-level messages (invalid domain / IP / URL entries, malformed row or
+	// header, invalid valid_until timestamp, etc.) or the generic `Upload failed` for
+	// unknown or infrastructure-level errors. Never echoes raw error text from the
+	// underlying loader. Intel accounts receive the verbatim loader/API error text
+	// (including specific offending values) instead of these category-level messages.
+	LatestUploadError string `json:"latest_upload_error"`
 	// Status of the latest snapshot uploaded
 	LatestUploadStatus IndicatorFeedGetResponseLatestUploadStatus `json:"latest_upload_status"`
 	// The date and time when the data entry was last modified
@@ -305,6 +313,7 @@ type indicatorFeedGetResponseJSON struct {
 	IsDownloadable     apijson.Field
 	IsPublic           apijson.Field
 	LastUploadSummary  apijson.Field
+	LatestUploadError  apijson.Field
 	LatestUploadStatus apijson.Field
 	ModifiedOn         apijson.Field
 	Name               apijson.Field

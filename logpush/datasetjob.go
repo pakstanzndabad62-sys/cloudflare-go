@@ -9,10 +9,10 @@ import (
 	"net/http"
 	"slices"
 
-	"github.com/cloudflare/cloudflare-go/v6/internal/param"
-	"github.com/cloudflare/cloudflare-go/v6/internal/requestconfig"
-	"github.com/cloudflare/cloudflare-go/v6/option"
-	"github.com/cloudflare/cloudflare-go/v6/packages/pagination"
+	"github.com/cloudflare/cloudflare-go/v7/internal/param"
+	"github.com/cloudflare/cloudflare-go/v7/internal/requestconfig"
+	"github.com/cloudflare/cloudflare-go/v7/option"
+	"github.com/cloudflare/cloudflare-go/v7/packages/pagination"
 )
 
 // DatasetJobService contains methods and other services that help with interacting
@@ -108,6 +108,7 @@ const (
 	DatasetJobGetParamsDatasetIDIPSECLogs                       DatasetJobGetParamsDatasetID = "ipsec_logs"
 	DatasetJobGetParamsDatasetIDMagicIDsDetections              DatasetJobGetParamsDatasetID = "magic_ids_detections"
 	DatasetJobGetParamsDatasetIDMcpPortalLogs                   DatasetJobGetParamsDatasetID = "mcp_portal_logs"
+	DatasetJobGetParamsDatasetIDMNMFlowLogs                     DatasetJobGetParamsDatasetID = "mnm_flow_logs"
 	DatasetJobGetParamsDatasetIDNELReports                      DatasetJobGetParamsDatasetID = "nel_reports"
 	DatasetJobGetParamsDatasetIDNetworkAnalyticsLogs            DatasetJobGetParamsDatasetID = "network_analytics_logs"
 	DatasetJobGetParamsDatasetIDPageShieldEvents                DatasetJobGetParamsDatasetID = "page_shield_events"
@@ -123,7 +124,7 @@ const (
 
 func (r DatasetJobGetParamsDatasetID) IsKnown() bool {
 	switch r {
-	case DatasetJobGetParamsDatasetIDAccessRequests, DatasetJobGetParamsDatasetIDAuditLogs, DatasetJobGetParamsDatasetIDAuditLogsV2, DatasetJobGetParamsDatasetIDBISOUserActions, DatasetJobGetParamsDatasetIDCasbFindings, DatasetJobGetParamsDatasetIDDevicePostureResults, DatasetJobGetParamsDatasetIDDEXApplicationTests, DatasetJobGetParamsDatasetIDDEXDeviceStateEvents, DatasetJobGetParamsDatasetIDDLPForensicCopies, DatasetJobGetParamsDatasetIDDNSFirewallLogs, DatasetJobGetParamsDatasetIDDNSLogs, DatasetJobGetParamsDatasetIDEmailSecurityAlerts, DatasetJobGetParamsDatasetIDEmailSecurityPostDeliveryEvents, DatasetJobGetParamsDatasetIDFirewallEvents, DatasetJobGetParamsDatasetIDGatewayDNS, DatasetJobGetParamsDatasetIDGatewayHTTP, DatasetJobGetParamsDatasetIDGatewayNetwork, DatasetJobGetParamsDatasetIDHTTPRequests, DatasetJobGetParamsDatasetIDIPSECLogs, DatasetJobGetParamsDatasetIDMagicIDsDetections, DatasetJobGetParamsDatasetIDMcpPortalLogs, DatasetJobGetParamsDatasetIDNELReports, DatasetJobGetParamsDatasetIDNetworkAnalyticsLogs, DatasetJobGetParamsDatasetIDPageShieldEvents, DatasetJobGetParamsDatasetIDSinkholeHTTPLogs, DatasetJobGetParamsDatasetIDSpectrumEvents, DatasetJobGetParamsDatasetIDSSHLogs, DatasetJobGetParamsDatasetIDWARPConfigChanges, DatasetJobGetParamsDatasetIDWARPToggleChanges, DatasetJobGetParamsDatasetIDWorkersTraceEvents, DatasetJobGetParamsDatasetIDZarazEvents, DatasetJobGetParamsDatasetIDZeroTrustNetworkSessions:
+	case DatasetJobGetParamsDatasetIDAccessRequests, DatasetJobGetParamsDatasetIDAuditLogs, DatasetJobGetParamsDatasetIDAuditLogsV2, DatasetJobGetParamsDatasetIDBISOUserActions, DatasetJobGetParamsDatasetIDCasbFindings, DatasetJobGetParamsDatasetIDDevicePostureResults, DatasetJobGetParamsDatasetIDDEXApplicationTests, DatasetJobGetParamsDatasetIDDEXDeviceStateEvents, DatasetJobGetParamsDatasetIDDLPForensicCopies, DatasetJobGetParamsDatasetIDDNSFirewallLogs, DatasetJobGetParamsDatasetIDDNSLogs, DatasetJobGetParamsDatasetIDEmailSecurityAlerts, DatasetJobGetParamsDatasetIDEmailSecurityPostDeliveryEvents, DatasetJobGetParamsDatasetIDFirewallEvents, DatasetJobGetParamsDatasetIDGatewayDNS, DatasetJobGetParamsDatasetIDGatewayHTTP, DatasetJobGetParamsDatasetIDGatewayNetwork, DatasetJobGetParamsDatasetIDHTTPRequests, DatasetJobGetParamsDatasetIDIPSECLogs, DatasetJobGetParamsDatasetIDMagicIDsDetections, DatasetJobGetParamsDatasetIDMcpPortalLogs, DatasetJobGetParamsDatasetIDMNMFlowLogs, DatasetJobGetParamsDatasetIDNELReports, DatasetJobGetParamsDatasetIDNetworkAnalyticsLogs, DatasetJobGetParamsDatasetIDPageShieldEvents, DatasetJobGetParamsDatasetIDSinkholeHTTPLogs, DatasetJobGetParamsDatasetIDSpectrumEvents, DatasetJobGetParamsDatasetIDSSHLogs, DatasetJobGetParamsDatasetIDWARPConfigChanges, DatasetJobGetParamsDatasetIDWARPToggleChanges, DatasetJobGetParamsDatasetIDWorkersTraceEvents, DatasetJobGetParamsDatasetIDZarazEvents, DatasetJobGetParamsDatasetIDZeroTrustNetworkSessions:
 		return true
 	}
 	return false

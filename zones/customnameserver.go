@@ -9,11 +9,11 @@ import (
 	"net/http"
 	"slices"
 
-	"github.com/cloudflare/cloudflare-go/v6/internal/apijson"
-	"github.com/cloudflare/cloudflare-go/v6/internal/param"
-	"github.com/cloudflare/cloudflare-go/v6/internal/requestconfig"
-	"github.com/cloudflare/cloudflare-go/v6/option"
-	"github.com/cloudflare/cloudflare-go/v6/packages/pagination"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apijson"
+	"github.com/cloudflare/cloudflare-go/v7/internal/param"
+	"github.com/cloudflare/cloudflare-go/v7/internal/requestconfig"
+	"github.com/cloudflare/cloudflare-go/v7/option"
+	"github.com/cloudflare/cloudflare-go/v7/packages/pagination"
 )
 
 // CustomNameserverService contains methods and other services that help with
@@ -258,7 +258,9 @@ type CustomNameserverGetResponseResultInfo struct {
 	// Number of results per page of results.
 	PerPage float64 `json:"per_page"`
 	// Total results available without any search parameters.
-	TotalCount float64                                   `json:"total_count"`
+	TotalCount float64 `json:"total_count"`
+	// The number of total pages in the entire result set.
+	TotalPages float64                                   `json:"total_pages"`
 	JSON       customNameserverGetResponseResultInfoJSON `json:"-"`
 }
 
@@ -269,6 +271,7 @@ type customNameserverGetResponseResultInfoJSON struct {
 	Page        apijson.Field
 	PerPage     apijson.Field
 	TotalCount  apijson.Field
+	TotalPages  apijson.Field
 	raw         string
 	ExtraFields map[string]apijson.Field
 }

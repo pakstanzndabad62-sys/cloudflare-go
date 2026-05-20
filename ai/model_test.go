@@ -8,10 +8,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/cloudflare/cloudflare-go/v6"
-	"github.com/cloudflare/cloudflare-go/v6/ai"
-	"github.com/cloudflare/cloudflare-go/v6/internal/testutil"
-	"github.com/cloudflare/cloudflare-go/v6/option"
+	"github.com/cloudflare/cloudflare-go/v7"
+	"github.com/cloudflare/cloudflare-go/v7/ai"
+	"github.com/cloudflare/cloudflare-go/v7/internal/testutil"
+	"github.com/cloudflare/cloudflare-go/v7/option"
 )
 
 func TestModelListWithOptionalParams(t *testing.T) {
@@ -31,6 +31,7 @@ func TestModelListWithOptionalParams(t *testing.T) {
 	_, err := client.AI.Models.List(context.TODO(), ai.ModelListParams{
 		AccountID:        cloudflare.F("023e105f4ecef8ad9ca31a8372d0c353"),
 		Author:           cloudflare.F("author"),
+		Format:           cloudflare.F(ai.ModelListParamsFormatOpenrouter),
 		HideExperimental: cloudflare.F(true),
 		Page:             cloudflare.F(int64(0)),
 		PerPage:          cloudflare.F(int64(0)),

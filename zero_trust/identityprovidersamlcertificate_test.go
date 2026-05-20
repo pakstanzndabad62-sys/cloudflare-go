@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package addressing_test
+package zero_trust_test
 
 import (
 	"context"
@@ -8,13 +8,14 @@ import (
 	"os"
 	"testing"
 
-	"github.com/cloudflare/cloudflare-go/v6"
-	"github.com/cloudflare/cloudflare-go/v6/addressing"
-	"github.com/cloudflare/cloudflare-go/v6/internal/testutil"
-	"github.com/cloudflare/cloudflare-go/v6/option"
+	"github.com/cloudflare/cloudflare-go/v7"
+	"github.com/cloudflare/cloudflare-go/v7/internal/testutil"
+	"github.com/cloudflare/cloudflare-go/v7/option"
+	"github.com/cloudflare/cloudflare-go/v7/zero_trust"
 )
 
-func TestRegionalHostnameRegionList(t *testing.T) {
+func TestIdentityProviderSAMLCertificateNew(t *testing.T) {
+	t.Skip("HTTP 404 error from prism")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -28,9 +29,13 @@ func TestRegionalHostnameRegionList(t *testing.T) {
 		option.WithAPIKey("144c9defac04969c7bfad8efaa8ea194"),
 		option.WithAPIEmail("user@example.com"),
 	)
-	_, err := client.Addressing.RegionalHostnames.Regions.List(context.TODO(), addressing.RegionalHostnameRegionListParams{
-		AccountID: cloudflare.F("023e105f4ecef8ad9ca31a8372d0c353"),
-	})
+	_, err := client.ZeroTrust.IdentityProviders.SAMLCertificate.New(
+		context.TODO(),
+		"f174e90a-fafe-4643-bbbc-4a0ed4fc8415",
+		zero_trust.IdentityProviderSAMLCertificateNewParams{
+			AccountID: cloudflare.F("023e105f4ecef8ad9ca31a8372d0c353"),
+		},
+	)
 	if err != nil {
 		var apierr *cloudflare.Error
 		if errors.As(err, &apierr) {

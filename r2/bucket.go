@@ -10,12 +10,12 @@ import (
 	"net/url"
 	"slices"
 
-	"github.com/cloudflare/cloudflare-go/v6/internal/apijson"
-	"github.com/cloudflare/cloudflare-go/v6/internal/apiquery"
-	"github.com/cloudflare/cloudflare-go/v6/internal/param"
-	"github.com/cloudflare/cloudflare-go/v6/internal/requestconfig"
-	"github.com/cloudflare/cloudflare-go/v6/option"
-	"github.com/cloudflare/cloudflare-go/v6/shared"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apijson"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apiquery"
+	"github.com/cloudflare/cloudflare-go/v7/internal/param"
+	"github.com/cloudflare/cloudflare-go/v7/internal/requestconfig"
+	"github.com/cloudflare/cloudflare-go/v7/option"
+	"github.com/cloudflare/cloudflare-go/v7/shared"
 )
 
 // BucketService contains methods and other services that help with interacting
@@ -33,6 +33,7 @@ type BucketService struct {
 	Locks              *BucketLockService
 	Metrics            *BucketMetricService
 	Sippy              *BucketSippyService
+	Objects            *BucketObjectService
 }
 
 // NewBucketService generates a new service that applies the given options to each
@@ -48,6 +49,7 @@ func NewBucketService(opts ...option.RequestOption) (r *BucketService) {
 	r.Locks = NewBucketLockService(opts...)
 	r.Metrics = NewBucketMetricService(opts...)
 	r.Sippy = NewBucketSippyService(opts...)
+	r.Objects = NewBucketObjectService(opts...)
 	return
 }
 

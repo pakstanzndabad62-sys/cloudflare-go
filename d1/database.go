@@ -11,13 +11,13 @@ import (
 	"slices"
 	"time"
 
-	"github.com/cloudflare/cloudflare-go/v6/internal/apijson"
-	"github.com/cloudflare/cloudflare-go/v6/internal/apiquery"
-	"github.com/cloudflare/cloudflare-go/v6/internal/param"
-	"github.com/cloudflare/cloudflare-go/v6/internal/requestconfig"
-	"github.com/cloudflare/cloudflare-go/v6/option"
-	"github.com/cloudflare/cloudflare-go/v6/packages/pagination"
-	"github.com/cloudflare/cloudflare-go/v6/shared"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apijson"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apiquery"
+	"github.com/cloudflare/cloudflare-go/v7/internal/param"
+	"github.com/cloudflare/cloudflare-go/v7/internal/requestconfig"
+	"github.com/cloudflare/cloudflare-go/v7/option"
+	"github.com/cloudflare/cloudflare-go/v7/packages/pagination"
+	"github.com/cloudflare/cloudflare-go/v7/shared"
 )
 
 // DatabaseService contains methods and other services that help with interacting
@@ -914,6 +914,8 @@ type DatabaseNewParams struct {
 	// Specify the region to create the D1 primary, if available. If this option is
 	// omitted, the D1 will be created as close as possible to the current user.
 	PrimaryLocationHint param.Field[DatabaseNewParamsPrimaryLocationHint] `json:"primary_location_hint"`
+	// Configuration for D1 read replication.
+	ReadReplication param.Field[DatabaseNewParamsReadReplication] `json:"read_replication"`
 }
 
 func (r DatabaseNewParams) MarshalJSON() (data []byte, err error) {
@@ -953,6 +955,36 @@ const (
 func (r DatabaseNewParamsPrimaryLocationHint) IsKnown() bool {
 	switch r {
 	case DatabaseNewParamsPrimaryLocationHintWnam, DatabaseNewParamsPrimaryLocationHintEnam, DatabaseNewParamsPrimaryLocationHintWeur, DatabaseNewParamsPrimaryLocationHintEeur, DatabaseNewParamsPrimaryLocationHintApac, DatabaseNewParamsPrimaryLocationHintOc:
+		return true
+	}
+	return false
+}
+
+// Configuration for D1 read replication.
+type DatabaseNewParamsReadReplication struct {
+	// The read replication mode for the database. Use 'auto' to create replicas and
+	// allow D1 automatically place them around the world, or 'disabled' to not use any
+	// database replicas (it can take a few hours for all replicas to be deleted).
+	Mode param.Field[DatabaseNewParamsReadReplicationMode] `json:"mode" api:"required"`
+}
+
+func (r DatabaseNewParamsReadReplication) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+// The read replication mode for the database. Use 'auto' to create replicas and
+// allow D1 automatically place them around the world, or 'disabled' to not use any
+// database replicas (it can take a few hours for all replicas to be deleted).
+type DatabaseNewParamsReadReplicationMode string
+
+const (
+	DatabaseNewParamsReadReplicationModeAuto     DatabaseNewParamsReadReplicationMode = "auto"
+	DatabaseNewParamsReadReplicationModeDisabled DatabaseNewParamsReadReplicationMode = "disabled"
+)
+
+func (r DatabaseNewParamsReadReplicationMode) IsKnown() bool {
+	switch r {
+	case DatabaseNewParamsReadReplicationModeAuto, DatabaseNewParamsReadReplicationModeDisabled:
 		return true
 	}
 	return false

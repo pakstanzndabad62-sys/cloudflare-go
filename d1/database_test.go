@@ -8,10 +8,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/cloudflare/cloudflare-go/v6"
-	"github.com/cloudflare/cloudflare-go/v6/d1"
-	"github.com/cloudflare/cloudflare-go/v6/internal/testutil"
-	"github.com/cloudflare/cloudflare-go/v6/option"
+	"github.com/cloudflare/cloudflare-go/v7"
+	"github.com/cloudflare/cloudflare-go/v7/d1"
+	"github.com/cloudflare/cloudflare-go/v7/internal/testutil"
+	"github.com/cloudflare/cloudflare-go/v7/option"
 )
 
 func TestDatabaseNewWithOptionalParams(t *testing.T) {
@@ -33,6 +33,9 @@ func TestDatabaseNewWithOptionalParams(t *testing.T) {
 		Name:                cloudflare.F("my-database"),
 		Jurisdiction:        cloudflare.F(d1.DatabaseNewParamsJurisdictionEu),
 		PrimaryLocationHint: cloudflare.F(d1.DatabaseNewParamsPrimaryLocationHintWnam),
+		ReadReplication: cloudflare.F(d1.DatabaseNewParamsReadReplication{
+			Mode: cloudflare.F(d1.DatabaseNewParamsReadReplicationModeAuto),
+		}),
 	})
 	if err != nil {
 		var apierr *cloudflare.Error

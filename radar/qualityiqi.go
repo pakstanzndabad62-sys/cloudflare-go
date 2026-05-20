@@ -9,11 +9,11 @@ import (
 	"slices"
 	"time"
 
-	"github.com/cloudflare/cloudflare-go/v6/internal/apijson"
-	"github.com/cloudflare/cloudflare-go/v6/internal/apiquery"
-	"github.com/cloudflare/cloudflare-go/v6/internal/param"
-	"github.com/cloudflare/cloudflare-go/v6/internal/requestconfig"
-	"github.com/cloudflare/cloudflare-go/v6/option"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apijson"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apiquery"
+	"github.com/cloudflare/cloudflare-go/v7/internal/param"
+	"github.com/cloudflare/cloudflare-go/v7/internal/requestconfig"
+	"github.com/cloudflare/cloudflare-go/v7/option"
 )
 
 // QualityIQIService contains methods and other services that help with interacting
@@ -614,19 +614,14 @@ func (r qualityIQITimeseriesGroupsResponseMetaUnitJSON) RawJSON() string {
 }
 
 type QualityIQITimeseriesGroupsResponseSerie0 struct {
-	P25        []string                                     `json:"p25" api:"required"`
-	P50        []string                                     `json:"p50" api:"required"`
-	P75        []string                                     `json:"p75" api:"required"`
-	Timestamps []string                                     `json:"timestamps" api:"required"`
-	JSON       qualityIQITimeseriesGroupsResponseSerie0JSON `json:"-"`
+	Timestamps  []time.Time                                  `json:"timestamps" api:"required" format:"date-time"`
+	ExtraFields map[string][]string                          `json:"-" api:"extrafields"`
+	JSON        qualityIQITimeseriesGroupsResponseSerie0JSON `json:"-"`
 }
 
 // qualityIQITimeseriesGroupsResponseSerie0JSON contains the JSON metadata for the
 // struct [QualityIQITimeseriesGroupsResponseSerie0]
 type qualityIQITimeseriesGroupsResponseSerie0JSON struct {
-	P25         apijson.Field
-	P50         apijson.Field
-	P75         apijson.Field
 	Timestamps  apijson.Field
 	raw         string
 	ExtraFields map[string]apijson.Field

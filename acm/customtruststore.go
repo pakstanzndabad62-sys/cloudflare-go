@@ -11,12 +11,12 @@ import (
 	"slices"
 	"time"
 
-	"github.com/cloudflare/cloudflare-go/v6/internal/apijson"
-	"github.com/cloudflare/cloudflare-go/v6/internal/apiquery"
-	"github.com/cloudflare/cloudflare-go/v6/internal/param"
-	"github.com/cloudflare/cloudflare-go/v6/internal/requestconfig"
-	"github.com/cloudflare/cloudflare-go/v6/option"
-	"github.com/cloudflare/cloudflare-go/v6/packages/pagination"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apijson"
+	"github.com/cloudflare/cloudflare-go/v7/internal/apiquery"
+	"github.com/cloudflare/cloudflare-go/v7/internal/param"
+	"github.com/cloudflare/cloudflare-go/v7/internal/requestconfig"
+	"github.com/cloudflare/cloudflare-go/v7/option"
+	"github.com/cloudflare/cloudflare-go/v7/packages/pagination"
 )
 
 // CustomTrustStoreService contains methods and other services that help with
@@ -38,7 +38,8 @@ func NewCustomTrustStoreService(opts ...option.RequestOption) (r *CustomTrustSto
 	return
 }
 
-// Add Custom Origin Trust Store for a Zone.
+// Upload a root CA certificate to the Custom Origin Trust Store for a Zone. Only
+// root CA certificates are accepted.
 func (r *CustomTrustStoreService) New(ctx context.Context, params CustomTrustStoreNewParams, opts ...option.RequestOption) (res *CustomTrustStore, err error) {
 	var env CustomTrustStoreNewResponseEnvelope
 	opts = slices.Concat(r.Options, opts)
@@ -82,7 +83,7 @@ func (r *CustomTrustStoreService) ListAutoPaging(ctx context.Context, params Cus
 	return pagination.NewV4PagePaginationArrayAutoPager(r.List(ctx, params, opts...))
 }
 
-// Removes a CA certificate from the custom origin trust store. Origins using
+// Removes a root CA certificate from the custom origin trust store. Origins using
 // certificates signed by this CA will no longer be trusted.
 func (r *CustomTrustStoreService) Delete(ctx context.Context, customOriginTrustStoreID string, body CustomTrustStoreDeleteParams, opts ...option.RequestOption) (res *CustomTrustStoreDeleteResponse, err error) {
 	var env CustomTrustStoreDeleteResponseEnvelope
@@ -104,8 +105,8 @@ func (r *CustomTrustStoreService) Delete(ctx context.Context, customOriginTrustS
 	return res, nil
 }
 
-// Retrieves details about a specific certificate in the custom origin trust store,
-// including expiration and subject information.
+// Retrieves details about a specific root CA certificate in the custom origin
+// trust store, including expiration and subject information.
 func (r *CustomTrustStoreService) Get(ctx context.Context, customOriginTrustStoreID string, query CustomTrustStoreGetParams, opts ...option.RequestOption) (res *CustomTrustStore, err error) {
 	var env CustomTrustStoreGetResponseEnvelope
 	opts = slices.Concat(r.Options, opts)
@@ -129,7 +130,8 @@ func (r *CustomTrustStoreService) Get(ctx context.Context, customOriginTrustStor
 type CustomTrustStore struct {
 	// Identifier.
 	ID string `json:"id" api:"required"`
-	// The zone's SSL certificate or certificate and the intermediate(s).
+	// The root CA certificate in PEM format. Only root CA certificates are accepted;
+	// intermediate and leaf certificates are not supported.
 	Certificate string `json:"certificate" api:"required"`
 	// When the certificate expires.
 	ExpiresOn time.Time `json:"expires_on" api:"required" format:"date-time"`
@@ -214,7 +216,8 @@ func (r customTrustStoreDeleteResponseJSON) RawJSON() string {
 type CustomTrustStoreNewParams struct {
 	// Identifier.
 	ZoneID param.Field[string] `path:"zone_id" api:"required"`
-	// The zone's SSL certificate or certificate and the intermediate(s).
+	// The root CA certificate in PEM format. Only root CA certificates are accepted;
+	// intermediate and leaf certificates are not supported.
 	Certificate param.Field[string] `json:"certificate" api:"required"`
 }
 

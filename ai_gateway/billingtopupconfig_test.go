@@ -8,14 +8,14 @@ import (
 	"os"
 	"testing"
 
-	"github.com/cloudflare/cloudflare-go/v6"
-	"github.com/cloudflare/cloudflare-go/v6/ai_gateway"
-	"github.com/cloudflare/cloudflare-go/v6/internal/testutil"
-	"github.com/cloudflare/cloudflare-go/v6/option"
+	"github.com/cloudflare/cloudflare-go/v7"
+	"github.com/cloudflare/cloudflare-go/v7/ai_gateway"
+	"github.com/cloudflare/cloudflare-go/v7/internal/testutil"
+	"github.com/cloudflare/cloudflare-go/v7/option"
 )
 
 func TestBillingTopupConfigNew(t *testing.T) {
-	t.Skip("HTTP 404 error from prism -- route not in spec")
+	t.Skip("HTTP 404 error from prism")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -44,7 +44,7 @@ func TestBillingTopupConfigNew(t *testing.T) {
 }
 
 func TestBillingTopupConfigDelete(t *testing.T) {
-	t.Skip("HTTP 404 error from prism -- route not in spec")
+	t.Skip("HTTP 404 error from prism")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -71,7 +71,7 @@ func TestBillingTopupConfigDelete(t *testing.T) {
 }
 
 func TestBillingTopupConfigGet(t *testing.T) {
-	t.Skip("HTTP 404 error from prism -- route not in spec")
+	t.Skip("HTTP 404 error from prism")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL

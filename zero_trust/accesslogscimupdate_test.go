@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cloudflare/cloudflare-go/v6"
-	"github.com/cloudflare/cloudflare-go/v6/internal/testutil"
-	"github.com/cloudflare/cloudflare-go/v6/option"
-	"github.com/cloudflare/cloudflare-go/v6/zero_trust"
+	"github.com/cloudflare/cloudflare-go/v7"
+	"github.com/cloudflare/cloudflare-go/v7/internal/testutil"
+	"github.com/cloudflare/cloudflare-go/v7/option"
+	"github.com/cloudflare/cloudflare-go/v7/zero_trust"
 )
 
 func TestAccessLogSCIMUpdateListWithOptionalParams(t *testing.T) {
@@ -31,16 +31,16 @@ func TestAccessLogSCIMUpdateListWithOptionalParams(t *testing.T) {
 	_, err := client.ZeroTrust.Access.Logs.SCIM.Updates.List(context.TODO(), zero_trust.AccessLogSCIMUpdateListParams{
 		AccountID:         cloudflare.F("023e105f4ecef8ad9ca31a8372d0c353"),
 		IdPID:             cloudflare.F([]string{"df7e2w5f-02b7-4d9d-af26-8d1988fca630", "0194ae2c-efcf-7cfb-8884-055f1a161fa5"}),
-		CfResourceID:      cloudflare.F("bd97ef8d-7986-43e3-9ee0-c25dda33e4b0"),
+		CfResourceID:      cloudflare.F([]string{"bd97ef8d-7986-43e3-9ee0-c25dda33e4b0"}),
 		Direction:         cloudflare.F(zero_trust.AccessLogSCIMUpdateListParamsDirectionDesc),
-		IdPResourceID:     cloudflare.F("idp_resource_id"),
+		IdPResourceID:     cloudflare.F([]string{"all_employees"}),
 		Limit:             cloudflare.F(int64(10)),
 		Page:              cloudflare.F(int64(0)),
 		PerPage:           cloudflare.F(int64(0)),
 		RequestMethod:     cloudflare.F([]zero_trust.AccessLogSCIMUpdateListParamsRequestMethod{zero_trust.AccessLogSCIMUpdateListParamsRequestMethodDelete, zero_trust.AccessLogSCIMUpdateListParamsRequestMethodPatch}),
-		ResourceGroupName: cloudflare.F("ALL_EMPLOYEES"),
+		ResourceGroupName: cloudflare.F([]string{"ALL_EMPLOYEES"}),
 		ResourceType:      cloudflare.F([]zero_trust.AccessLogSCIMUpdateListParamsResourceType{zero_trust.AccessLogSCIMUpdateListParamsResourceTypeUser, zero_trust.AccessLogSCIMUpdateListParamsResourceTypeGroup}),
-		ResourceUserEmail: cloudflare.F("john.smith@example.com"),
+		ResourceUserEmail: cloudflare.F([]string{"john.smith@example.com"}),
 		Since:             cloudflare.F(time.Now()),
 		Status:            cloudflare.F([]zero_trust.AccessLogSCIMUpdateListParamsStatus{zero_trust.AccessLogSCIMUpdateListParamsStatusFailure, zero_trust.AccessLogSCIMUpdateListParamsStatusSuccess}),
 		Until:             cloudflare.F(time.Now()),

@@ -3,7 +3,7 @@
 package zero_trust
 
 import (
-	"github.com/cloudflare/cloudflare-go/v6/option"
+	"github.com/cloudflare/cloudflare-go/v7/option"
 )
 
 // ZeroTrustService contains methods and other services that help with interacting
@@ -26,6 +26,7 @@ type ZeroTrustService struct {
 	Gateway              *GatewayService
 	Networks             *NetworkService
 	RiskScoring          *RiskScoringService
+	ResourceLibrary      *ResourceLibraryService
 }
 
 // NewZeroTrustService generates a new service that applies the given options to
@@ -46,5 +47,6 @@ func NewZeroTrustService(opts ...option.RequestOption) (r *ZeroTrustService) {
 	r.Gateway = NewGatewayService(opts...)
 	r.Networks = NewNetworkService(opts...)
 	r.RiskScoring = NewRiskScoringService(opts...)
+	r.ResourceLibrary = NewResourceLibraryService(opts...)
 	return
 }
