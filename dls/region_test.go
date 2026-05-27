@@ -1,21 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package billing_test
+package dls_test
 
 import (
 	"context"
 	"errors"
 	"os"
 	"testing"
-	"time"
 
 	"github.com/cloudflare/cloudflare-go/v7"
-	"github.com/cloudflare/cloudflare-go/v7/billing"
+	"github.com/cloudflare/cloudflare-go/v7/dls"
 	"github.com/cloudflare/cloudflare-go/v7/internal/testutil"
 	"github.com/cloudflare/cloudflare-go/v7/option"
 )
 
-func TestUsageGetWithOptionalParams(t *testing.T) {
+func TestRegionListWithOptionalParams(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -29,11 +28,11 @@ func TestUsageGetWithOptionalParams(t *testing.T) {
 		option.WithAPIKey("144c9defac04969c7bfad8efaa8ea194"),
 		option.WithAPIEmail("user@example.com"),
 	)
-	_, err := client.Billing.Usage.Get(context.TODO(), billing.UsageGetParams{
-		AccountID: cloudflare.F("023e105f4ecef8ad9ca31a8372d0c353"),
-		From:      cloudflare.F(time.Now()),
-		Metric:    cloudflare.F("workers_standard_requests"),
-		To:        cloudflare.F(time.Now()),
+	_, err := client.DLS.Regions.List(context.TODO(), dls.RegionListParams{
+		AccountID: cloudflare.F(int64(0)),
+		Cursor:    cloudflare.F("cursor"),
+		PerPage:   cloudflare.F(int64(1)),
+		Type:      cloudflare.F(dls.RegionListParamsTypeManaged),
 	})
 	if err != nil {
 		var apierr *cloudflare.Error
@@ -44,7 +43,7 @@ func TestUsageGetWithOptionalParams(t *testing.T) {
 	}
 }
 
-func TestUsagePaygoWithOptionalParams(t *testing.T) {
+func TestRegionGet(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -58,11 +57,13 @@ func TestUsagePaygoWithOptionalParams(t *testing.T) {
 		option.WithAPIKey("144c9defac04969c7bfad8efaa8ea194"),
 		option.WithAPIEmail("user@example.com"),
 	)
-	_, err := client.Billing.Usage.Paygo(context.TODO(), billing.UsagePaygoParams{
-		AccountID: cloudflare.F("023e105f4ecef8ad9ca31a8372d0c353"),
-		From:      cloudflare.F(time.Now()),
-		To:        cloudflare.F(time.Now()),
-	})
+	_, err := client.DLS.Regions.Get(
+		context.TODO(),
+		"a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		dls.RegionGetParams{
+			AccountID: cloudflare.F(int64(0)),
+		},
+	)
 	if err != nil {
 		var apierr *cloudflare.Error
 		if errors.As(err, &apierr) {
