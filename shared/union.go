@@ -221,6 +221,16 @@ func (UnionString) ImplementsSnapshotNewResponseAccessibilityTreeValueUnion()   
 func (UnionString) ImplementsJsonNewParamsBodyObjectResponseFormatJsonSchemaUnion()                {}
 func (UnionString) ImplementsCrawlNewParamsBodyObjectJsonOptionsResponseFormatJsonSchemaUnion()    {}
 
+// Restored after excluding realtime_kit from staging-next sync. The
+// realtime_kit Preset Union types remain on origin/next and require
+// these shared.UnionString implementations.
+func (UnionString) ImplementsPresetNewResponseDataPermissionsPluginsConfigUnion()           {}
+func (UnionString) ImplementsPresetUpdateResponseDataPermissionsPluginsConfigUnion()        {}
+func (UnionString) ImplementsPresetDeleteResponseDataPermissionsPluginsConfigUnion()        {}
+func (UnionString) ImplementsPresetGetPresetByIDResponseDataPermissionsPluginsConfigUnion() {}
+func (UnionString) ImplementsPresetNewParamsPermissionsPluginsConfigUnion()                 {}
+func (UnionString) ImplementsPresetUpdateParamsPermissionsPluginsConfigUnion()              {}
+
 type UnionBool bool
 
 func (UnionBool) ImplementsVersionAssetsConfigRunWorkerFirstUnionParam()               {}
